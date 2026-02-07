@@ -1,0 +1,377 @@
+/* Cupid's Code - Valentine's Theme */
+
+:root {
+    --pink-light: #fce4ec;
+    --pink-main: #ec407a;
+    --pink-dark: #c2185b;
+    --red-love: #e91e63;
+    --purple-dream: #9c27b0;
+    --gold-sparkle: #ffd700;
+    --white-pure: #ffffff;
+    --text-dark: #4a1a2c;
+    --glass-bg: rgba(255, 255, 255, 0.15);
+    --glass-border: rgba(255, 255, 255, 0.3);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    color: var(--text-dark);
+    overflow-x: hidden;
+}
+
+.background-gradient {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #ff6b9d 0%, #c44569 25%, #f8b500 50%, #ff6b9d 75%, #c44569 100%);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+    z-index: -1;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.content-wrapper {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    padding: 2rem;
+}
+
+/* Hero Section */
+.hero-section {
+    text-align: center;
+    padding: 3rem 1rem;
+    position: relative;
+}
+
+.main-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 4rem;
+    color: var(--white-pure);
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3), 0 0 30px rgba(255, 255, 255, 0.5);
+    margin-bottom: 1rem;
+    animation: titlePulse 2s ease-in-out infinite;
+}
+
+@keyframes titlePulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+}
+
+.subtitle {
+    font-size: 1.3rem;
+    color: rgba(255, 255, 255, 0.95);
+    font-weight: 300;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Floating Hearts */
+.floating-hearts {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.heart {
+    position: absolute;
+    font-size: 2rem;
+    animation: floatHeart 6s ease-in-out infinite;
+    opacity: 0.7;
+}
+
+.heart:nth-child(1) { left: 5%; animation-delay: 0s; }
+.heart:nth-child(2) { left: 15%; animation-delay: 1s; font-size: 1.5rem; }
+.heart:nth-child(3) { left: 25%; animation-delay: 2s; }
+.heart:nth-child(4) { left: 40%; animation-delay: 0.5s; font-size: 2.5rem; }
+.heart:nth-child(5) { left: 55%; animation-delay: 1.5s; }
+.heart:nth-child(6) { left: 70%; animation-delay: 2.5s; font-size: 1.8rem; }
+.heart:nth-child(7) { left: 85%; animation-delay: 0.8s; }
+.heart:nth-child(8) { left: 95%; animation-delay: 1.8s; font-size: 1.3rem; }
+
+@keyframes floatHeart {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-20px) rotate(10deg); }
+    50% { transform: translateY(-10px) rotate(-5deg); }
+    75% { transform: translateY(-25px) rotate(5deg); }
+}
+
+/* Container */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Cards */
+.card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 24px;
+    border: 1px solid var(--glass-border);
+    margin-bottom: 2rem;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15), inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+}
+
+.card-header {
+    background: linear-gradient(135deg, rgba(236, 64, 122, 0.3), rgba(156, 39, 176, 0.3));
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.heart-icon {
+    font-size: 2rem;
+    animation: heartBeat 1.5s ease-in-out infinite;
+}
+
+@keyframes heartBeat {
+    0%, 100% { transform: scale(1); }
+    25% { transform: scale(1.1); }
+    50% { transform: scale(1); }
+    75% { transform: scale(1.15); }
+}
+
+.card-header h2 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.8rem;
+    color: var(--white-pure);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.card-body {
+    padding: 2rem;
+}
+
+/* Form Elements */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    color: var(--white-pure);
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.form-control {
+    width: 100%;
+    padding: 1rem 1.25rem;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--text-dark);
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--pink-main);
+    box-shadow: 0 0 0 4px rgba(236, 64, 122, 0.3), 0 0 20px rgba(236, 64, 122, 0.2);
+}
+
+.form-control::placeholder {
+    color: #999;
+}
+
+.template-input {
+    font-family: 'Courier New', monospace;
+    line-height: 1.6;
+    resize: vertical;
+    min-height: 150px;
+}
+
+.hint {
+    display: block;
+    margin-top: 0.5rem;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+/* Submit Button */
+.btn-love {
+    width: 100%;
+    padding: 1.25rem 2rem;
+    font-size: 1.2rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: var(--white-pure);
+    background: linear-gradient(135deg, var(--pink-main), var(--purple-dream));
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(236, 64, 122, 0.4);
+}
+
+.btn-love:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(236, 64, 122, 0.5);
+}
+
+.btn-love:active {
+    transform: translateY(0);
+}
+
+.btn-love::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.btn-love:hover::before {
+    left: 100%;
+}
+
+.btn-sparkle {
+    position: absolute;
+    right: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    animation: sparkle 1s ease-in-out infinite;
+}
+
+@keyframes sparkle {
+    0%, 100% { opacity: 1; transform: translateY(-50%) scale(1); }
+    50% { opacity: 0.5; transform: translateY(-50%) scale(1.2); }
+}
+
+/* Result Card */
+.result-card {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.letter-paper {
+    background: linear-gradient(180deg, #fffef0 0%, #fff8e1 100%);
+    border-radius: 8px;
+    padding: 2rem;
+    position: relative;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    min-height: 150px;
+}
+
+.letter-paper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: repeating-linear-gradient(
+        90deg,
+        var(--pink-main),
+        var(--pink-main) 10px,
+        var(--pink-light) 10px,
+        var(--pink-light) 20px
+    );
+    border-radius: 8px 8px 0 0;
+}
+
+.letter-content {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.4rem;
+    line-height: 1.8;
+    color: #5d4037;
+    white-space: pre-wrap;
+}
+
+.letter-seal {
+    position: absolute;
+    bottom: -15px;
+    right: 20px;
+    font-size: 2.5rem;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.2));
+    animation: sealBounce 2s ease-in-out infinite;
+}
+
+@keyframes sealBounce {
+    0%, 100% { transform: rotate(-5deg); }
+    50% { transform: rotate(5deg); }
+}
+
+/* Error Card */
+.error-card {
+    background: rgba(244, 67, 54, 0.2);
+    border-color: rgba(244, 67, 54, 0.5);
+}
+
+.error-text {
+    color: var(--white-pure);
+    font-weight: 500;
+    text-align: center;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 2rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.footer p {
+    margin-bottom: 0.5rem;
+}
+
+.footer-hint {
+    font-size: 0.85rem;
+    font-style: italic;
+    opacity: 0.7;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .main-title {
+        font-size: 2.5rem;
+    }
+    
+    .subtitle {
+        font-size: 1rem;
+    }
+    
+    .card-body {
+        padding: 1.5rem;
+    }
+    
+    .content-wrapper {
+        padding: 1rem;
+    }
+}

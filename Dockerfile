@@ -1,0 +1,36 @@
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /src
+
+COPY src/CupidsCode.csproj ./
+RUN dotnet restore
+
+COPY src/ ./
+RUN dotnet publish -c Release -o /app/publish
+
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
+WORKDIR /app
+
+COPY --from=build /app/publish .
+
+RUN chmod 1777 /tmp
+
+# Create unprivileged user
+RUN adduser --disabled-password --gecos "" ctfuser
+
+# Set permissions - make DLL read-only, restrict access
+RUN chown -R root:root /app && \
+    chmod -R 444 /app/*.dll && \
+    chmod 555 /app && \
+    chown -R ctfuser:ctfuser /tmp
+
+ENV ASPNETCORE_URLS=http://+:8080
+ENV ASPNETCORE_ENVIRONMENT=Production
+ENV CTFD_URL=https://noobctf.infoseciitr.in
+ENV CHALLENGE_ID=43
+
+USER ctfuser
+
+EXPOSE 8080
+
+ENTRYPOINT ["dotnet", "CupidsCode.dll"]
+

@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  cupids-code:
+    build: .
+    container_name: cupids-code
+    ports:
+      - "8014:8080"
+    restart: unless-stopped
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
