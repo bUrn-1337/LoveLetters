@@ -66,15 +66,21 @@ public class FlagService
         _ctfdUrl = Environment.GetEnvironmentVariable("CTFD_URL")?.TrimEnd('/') 
             ?? "https://noobctf.infoseciitr.in";
         _challengeId = int.TryParse(Environment.GetEnvironmentVariable("CHALLENGE_ID"), out var id) 
-            ? id : 43;
+            ? id : 50;
         _httpClient = new HttpClient { Timeout = TimeSpan.FromSeconds(10) };
         _httpClient.DefaultRequestHeaders.Add("Authorization", $"Token {GetApiKey()}");
     }
     
     public string GenerateFlag(string userToken)
     {
+        Console.WriteLine($"[DEBUG] CTFd URL: {_ctfdUrl}");
+        Console.WriteLine($"[DEBUG] Challenge ID: {_challengeId}");
+        Console.WriteLine($"[DEBUG] API Key (first 10 chars): {GetApiKey().Substring(0, Math.Min(10, GetApiKey().Length))}...");
+        
         var existingFlags = FetchExistingFlags();
         var flag = GenerateUniqueFlag(existingFlags);
+        
+        Console.WriteLine($"[DEBUG] Generated flag: {flag}");
         
         try
         {
@@ -84,6 +90,7 @@ public class FlagService
         catch (Exception ex)
         {
             Console.WriteLine($"[!] Error uploading flag: {ex.Message}");
+            Console.WriteLine($"[!] Stack trace: {ex.StackTrace}");
         }
         
         return flag;
@@ -158,23 +165,28 @@ public class FlagService
         {
             challenge_id = _challengeId,
             content = flag,
-            type = "static",
+            type = "red_herring",
             data = ""
         };
         
         var json = System.Text.Json.JsonSerializer.Serialize(payload);
+        Console.WriteLine($"[DEBUG] Upload payload: {json}");
+        
         var content = new StringContent(json, Encoding.UTF8, "application/json");
         
+        Console.WriteLine($"[DEBUG] Posting to: {_ctfdUrl}/api/v1/flags");
         var response = await _httpClient.PostAsync($"{_ctfdUrl}/api/v1/flags", content);
+        
+        var body = await response.Content.ReadAsStringAsync();
+        Console.WriteLine($"[DEBUG] Response status: {(int)response.StatusCode}");
+        Console.WriteLine($"[DEBUG] Response body: {body}");
         
         if (!response.IsSuccessStatusCode)
         {
-            var body = await response.Content.ReadAsStringAsync();
             throw new Exception($"Bad status: {(int)response.StatusCode}. Response: {body}");
         }
         
-        var result = await response.Content.ReadAsStringAsync();
-        var apiResult = System.Text.Json.JsonSerializer.Deserialize<ApiResponse>(result);
+        var apiResult = System.Text.Json.JsonSerializer.Deserialize<ApiResponse>(body);
         if (apiResult?.Success != true)
         {
             throw new Exception("API returned success: false");

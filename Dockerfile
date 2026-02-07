@@ -24,7 +24,7 @@ RUN chown -R root:root /app && \
 ENV ASPNETCORE_URLS=http://+:8080
 ENV ASPNETCORE_ENVIRONMENT=Production
 ENV CTFD_URL=https://noobctf.infoseciitr.in
-ENV CHALLENGE_ID=666
+ENV CHALLENGE_ID=50
 
 USER ctfuser
 
