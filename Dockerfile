@@ -1,7 +1,7 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
-COPY src/CupidsCode.csproj ./
+COPY src/LoveLetters.csproj ./
 RUN dotnet restore
 
 COPY src/ ./
@@ -30,5 +30,5 @@ USER ctfuser
 
 EXPOSE 8080
 
-ENTRYPOINT ["dotnet", "CupidsCode.dll"]
+ENTRYPOINT ["dotnet", "LoveLetters.dll"]
 

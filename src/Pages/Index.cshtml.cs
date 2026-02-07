@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using RazorLight;
 
-namespace CupidsCode.Pages;
+namespace LoveLetters.Pages;
 
 public class IndexModel : PageModel
 {
@@ -73,7 +73,7 @@ public class IndexModel : PageModel
             {
                 if (Template.Contains(pattern, StringComparison.OrdinalIgnoreCase))
                 {
-                    ErrorMessage = "💔 Cupid detected forbidden magic! Love letters must be pure...";
+                    ErrorMessage = "💔 Forbidden magic detected! Love letters must be pure...";
                     return Page();
                 }
             }
@@ -81,7 +81,7 @@ public class IndexModel : PageModel
             if (System.Text.RegularExpressions.Regex.IsMatch(Template, @"typeof\s*\(\s*\w+\s*\)\s*\.\s*Assembly", 
                 System.Text.RegularExpressions.RegexOptions.IgnoreCase))
             {
-                ErrorMessage = "💔 Cupid detected forbidden magic! Love letters must be pure...";
+                ErrorMessage = "💔 Forbidden magic detected! Love letters must be pure...";
                 return Page();
             }
             
@@ -105,7 +105,7 @@ public class IndexModel : PageModel
         catch (Exception ex)
         {
             _logger.LogError(ex, "Failed to render love letter template");
-            ErrorMessage = "Oops! Cupid's magic failed. Please check your template syntax. 💔";
+            ErrorMessage = "Oops! Love letter magic failed. Please check your template syntax. 💔";
         }
 
         return Page();

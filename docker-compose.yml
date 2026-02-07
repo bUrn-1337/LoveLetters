@@ -1,9 +1,9 @@
 version: '3.8'
 
 services:
-  cupids-code:
+  love-letters:
     build: .
-    container_name: cupids-code
+    container_name: love-letters
     ports:
       - "8014:8080"
     restart: unless-stopped

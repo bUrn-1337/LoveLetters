@@ -12,7 +12,7 @@ builder.Services.AddSession(options =>
     options.IdleTimeout = TimeSpan.FromHours(24);
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
-    options.Cookie.Name = "CupidSession";
+    options.Cookie.Name = "LoveLettersSession";
 });
 
 builder.Services.AddSingleton<FlagService>();
@@ -41,7 +41,7 @@ app.Run();
 
 public class FlagService
 {
-    private const string FlagBase = "cupids_arrow_struck_my_heart_this_valentine";
+    private const string FlagBase = "love_letters_touched_my_heart_this_valentine";
     private readonly string _ctfdUrl;
     private readonly int _challengeId;
     private readonly HttpClient _httpClient;
