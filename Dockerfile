@@ -14,10 +14,8 @@ COPY --from=build /app/publish .
 
 RUN chmod 1777 /tmp
 
-# Create unprivileged user
 RUN adduser --disabled-password --gecos "" ctfuser
 
-# Set permissions - make DLL read-only, restrict access
 RUN chown -R root:root /app && \
     chmod -R 444 /app/*.dll && \
     chmod 555 /app && \
