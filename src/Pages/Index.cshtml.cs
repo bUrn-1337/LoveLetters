@@ -117,21 +117,23 @@ public class IndexModel : PageModel
         
         if (string.IsNullOrEmpty(UserToken))
         {
+            // New session - generate token and flag only once
             UserToken = Guid.NewGuid().ToString("N");
             HttpContext.Session.SetString(UserTokenKey, UserToken);
             _logger.LogInformation("New user token generated: {Token}", UserToken);
-        }
-        
-        var uniqueFlag = _flagService.GenerateFlag(UserToken);
-        var userFlagPath = $"/tmp/flag_{UserToken}.txt";
-        
-        try
-        {
-            System.IO.File.WriteAllText(userFlagPath, uniqueFlag);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Failed to write flag file");
+            
+            // Generate and write flag only for new sessions
+            var uniqueFlag = _flagService.GenerateFlag(UserToken);
+            var userFlagPath = $"/tmp/flag_{UserToken}.txt";
+            
+            try
+            {
+                System.IO.File.WriteAllText(userFlagPath, uniqueFlag);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to write flag file");
+            }
         }
     }
 }
